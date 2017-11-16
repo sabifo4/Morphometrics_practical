@@ -26,8 +26,8 @@ library(geomorph)
 # directory with the next commands. If you are not going to use this
 # option and prefer option 1), do not run the following commands or 
 # just uncomment them
-filename = "Morphometrics_practical.R"
-filepath = file.choose()  # browse and select your_file.R in the window
+filename <- "Morphometrics_practical.R"
+filepath <- file.choose()  # browse and select your_file.R in the window
 wd = substr(filepath, 1, nchar(filepath)-nchar(filename))
 # I run the next command in case it has been run in Windows
 wd <- gsub(pattern="[\\]", replace="/", x=wd)
@@ -47,18 +47,19 @@ df <- read.table(file=paste(wd,"data/Triturus_and_Calotriton_lmk_reduced.csv", s
 # The first 3 columns do not contain the coordinates 
 # Get from the 4th to the nth column, where the data is 
 mm <- df[,4:(dim(df)[2])] # 9sp x 144coords (144/3=48 lmk)
-# Get name of species as row names
+# Get name of specimens as row names
 rownames(mm) <- df[,1]
 
 #\\ Create an empty array to store the coordinates in the format 
-#\\ p x k x n (lmk x coords x sp)
-ns <- 9
+#\\ p x k x n (num.coords x coor3D x ns)
+num.coords <- dim(mm)[2]
 coor3D <- 3
-ma <- array(dim=c(dim(mm)[2]/coor3D, coor3D, ns)) # 48 lmks, 3D, 9 specimens
+ns <- 9
+ma <- array(dim=c(num.coords/coor3D, coor3D, ns)) # 48 lmks, 3D, 9 specimens
 
 #\\ Select the positions from 1 to 144 that correspond to 
 #\\ x coords, y coords, and z coords
-xi <- seq(from=1, to=dim(mm)[2], by=coor3D); yi <- xi+1; zi <- yi+1
+xi <- seq(from=1, to=num.coords, by=coor3D); yi <- xi+1; zi <- yi+1
 
 ## -------------------------------------- ##
 ## ************************************** ##
@@ -106,7 +107,7 @@ ma.paln <- geomorph::gpagen(ma)
 #\\ previously superimposed in "ma.paln" into 
 #\\ a data.frame format with dimensions 
 #\\ p x n (sp x coords)
-faln <- matrix(0, nrow=ns, ncol=dim(mm)[2])
+faln <- matrix(0, nrow=ns, ncol=num.coords)
 for (i in 1:ns) {
   faln[i,xi] <- ma.paln$coords[,1,i]
   faln[i,yi] <- ma.paln$coords[,2,i]
@@ -140,7 +141,7 @@ for (i in 1:ns) {
 # this plot
 #
 # pdf("plots/Raw_data_2D.pdf", paper="a4", width=15, height=15)
-plotAllSpecimens(ma[,1:2,]) ## 2D
+plotAllSpecimens(ma[,1:2,])
 # dev.off()
 
 #\\ Plot the data set after PA
@@ -148,12 +149,11 @@ plotAllSpecimens(ma[,1:2,]) ## 2D
 # this plot
 #
 # pdf("plots/Data_after_PA_2D.pdf", paper="a4", width=15, height=15)
-plotAllSpecimens(ma.paln$coords[,1:2,]) ## 2D
+plotAllSpecimens(ma.paln$coords[,1:2,]) 
 # dev.off()
 
 #\\ Plot a 2D procrustes plot with lines x=0 and y=0 and mean shape
 # 
-#
 # Here we have decided to add to the plot the mean of every group of 
 # landmarks (one landmark per specimen) that fall to the same point 
 # in the plot forming the skull shape --> "points()"
