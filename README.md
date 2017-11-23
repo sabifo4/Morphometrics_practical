@@ -9,4 +9,4 @@ The R script includes a series of commands to:
 * Perform the PA with the R function `geomorph::gpagen`
 * Plot the superimposition of landmark points before and after the PA.
 
-A detailed explanation of the usage of PA with morphological data can be found at [my website](https://sabifo4.github.io/blog/Morphometrics_and_Procrustes_alignment)
+A detailed explanation of the usage of PA with morphological data can be found at [my website](https://sabifo4.github.io/blog/Morphometrics_and_Procrustes_alignment).
