@@ -1,7 +1,7 @@
 # Morphometrics practical
 This repository is used to give an example of how to perform a Procrustes analysis (PA) with the R package `geomorph`.
 
-The data set used is a subset of the [data](http://datadryad.org/resource/doi:10.5061/dryad.nr210) provided by [Ivanović A, Arntzen JW](https://academic.oup.com/biolinnean/article-lookup/doi/10.1111/bij.12314), which consists of one specimen of each species randomly sampled. This subset can be found in the file *"Triturus_and_Calotriton_lmk_reduced.csv"*
+The data set used is a subset of the [data](http://datadryad.org/resource/doi:10.5061/dryad.nr210) provided by [Ivanović A, Arntzen JW](https://academic.oup.com/biolinnean/article-lookup/doi/10.1111/bij.12314), which consists of one specimen of each species randomly sampled. This subset can be found in the file *"Triturus_and_Calotriton_lmk_reduced.csv"*.
 
 The R script includes a series of commands to:
 * Prepare the environment
